@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
  * Singly Linked List implementation
  * @author Brandon Manke
  */
-
 public class LinkedList<E> {
     private Node<E> head;
     private int size;
@@ -81,7 +80,7 @@ public class LinkedList<E> {
      * @param data {E} value to be inserted at end of list
      */
     public void insertAfter(E data) {
-        Node<E> currentNode = new Node(data);
+        Node<E> currentNode = head;
 
         if (head == null) {
             head = new Node(data);
@@ -100,7 +99,8 @@ public class LinkedList<E> {
      * @param index {E} value to be inserted at index
      */
     public void insert(int index) {
-
+        Node<E> currentNode = head;
+        int count = 0;
     }
 
     /**
@@ -203,5 +203,18 @@ public class LinkedList<E> {
         }
 
         return reversed;
+    }
+
+    @Override
+    public String toString() {
+        Node<E> currentNode = head;
+        String list = "";
+
+        while (currentNode.next != null) {
+            list += (currentNode.data.toString() + " --> ");
+            currentNode = currentNode.next;
+        }
+        list += (currentNode.data.toString() + "");
+        return list;
     }
 }
