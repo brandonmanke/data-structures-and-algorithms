@@ -42,11 +42,12 @@ LinkedList.prototype.getValue = function(index) {
             return current.data;
         }
                 
-        if (count < this.size - 1) {
+        if (count <= this.size - 1) {
             count++;
         }
         current = current.next;
     }
+
     return -1; // if nothing is found
 }
 
@@ -90,6 +91,14 @@ LinkedList.prototype.insertAfter = function(data) {
 }
 
 /**
+ * Removes value at specified index
+ * @param {number} index of node to be removed
+ */
+LinkedList.prototype.insert = function(index) {
+
+}
+
+/**
  * Removes node at the beginning of the list.
  * @return data of removed node
  */
@@ -97,6 +106,7 @@ LinkedList.prototype.removedHead = function() {
     if (this.head === null) {
         throw console.log('No such element');
     }
+
     var temp = this.head;
     this.head = temp.next;
     this.size--;
@@ -146,6 +156,7 @@ LinkedList.prototype.remove = function(index) {
         count++;
         current = current.next;
     }
+
     return temp.data;
 }
 
@@ -153,7 +164,19 @@ LinkedList.prototype.remove = function(index) {
  * Reverses linked-list.
  */
 LinkedList.prototype.reverse = function() {
+    var reversed = new LinkedList();
+    var current = head;
 
+    if (this.head === null) {
+        throw console.log('List is empty');
+    }
+
+    while (current.next !== null) {
+        reversed.insertBefore(current.data);
+        current = current.next;
+    }
+
+    return reversed;
 }
 
 /**
@@ -182,6 +205,7 @@ LinkedList.prototype.toString = function() {
     } else {
         throw console.log('List is empty');
     }
+
     string += current.data;
     return string;
 }
