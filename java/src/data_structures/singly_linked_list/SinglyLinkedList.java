@@ -126,6 +126,7 @@ public class SinglyLinkedList<E> {
             if (count == index - 1) {
                 value.next = currentNode.next;
                 currentNode.next = value;
+                size++;
                 break;
             }
 
@@ -161,6 +162,7 @@ public class SinglyLinkedList<E> {
             if (count == index - 2) {
                 value.next = currentNode.next;
                 currentNode.next = value;
+                size++;
                 break;
             }
 
@@ -241,6 +243,7 @@ public class SinglyLinkedList<E> {
 
         Node<E> removedValue = currentNode.next;
         currentNode.next = currentNode.next.next;
+        size--;
         return removedValue.data;
     }
 
@@ -265,6 +268,7 @@ public class SinglyLinkedList<E> {
             if (currentNode.next == value) {
                 Node<E> temp = currentNode.next;
                 currentNode.next = currentNode.next.next;
+                size--;
                 return temp.data;
             }
             currentNode = currentNode.next;
