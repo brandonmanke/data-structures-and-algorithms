@@ -6,6 +6,7 @@ package data_structures.singly_linked_list;
  */
 
 public class Node<E> {
+
     public E data;
     public Node next;
 

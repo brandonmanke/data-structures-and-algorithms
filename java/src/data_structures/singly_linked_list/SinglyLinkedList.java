@@ -6,11 +6,13 @@ import java.util.NoSuchElementException;
  * Singly Linked List implementation
  * @author Brandon Manke
  */
-public class LinkedList<E> {
+@SuppressWarnings("unchecked")
+public class SinglyLinkedList<E> {
+
     private Node<E> head;
     private int size;
 
-    public LinkedList() {
+    public SinglyLinkedList() {
         head = null;
         size = 0;
     }
@@ -83,24 +85,91 @@ public class LinkedList<E> {
         Node<E> currentNode = head;
 
         if (head == null) {
-            head = new Node(data);
+            head = new Node<>(data);
             size++;
         } else {
             while (currentNode.next != null) {
                 currentNode = currentNode.next;
             }
-            currentNode.next = new Node(data);
+
+            currentNode.next = new Node<>(data);
             size++;
         }
     }
 
     /**
      * Inserts value at specified index
-     * @param index {E} value to be inserted at index
+     * @param data {E} value to be inserted at index
+     * @param index {int} index in list value is to be inserted
      */
-    public void insert(int index) {
+    public void insertAfter(E data, int index) {
         Node<E> currentNode = head;
         int count = 0;
+
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            insertBefore(data);
+            return;
+        }
+
+        if (index == size - 1) {
+            insertAfter(data);
+            return;
+        }
+
+        Node<E> value = new Node<>(data);
+
+        while (currentNode.next != null) {
+            if (count == index - 1) {
+                value.next = currentNode.next;
+                currentNode.next = value;
+                break;
+            }
+
+            if (count <= size - 1) {
+                count++;
+            }
+
+            currentNode = currentNode.next;
+        }
+    }
+
+    /**
+     * Inserts value before value at specified index
+     * @param data {E} value to be inserted at index
+     * @param index {int} index in list value is to be inserted before
+     */
+    public void insertBefore(E data, int index) {
+        Node<E> currentNode = head;
+        int count = 0;
+
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (index == 0) {
+            insertBefore(data);
+            return;
+        }
+
+        Node<E> value = new Node<>(data);
+
+        while (currentNode.next != null) {
+            if (count == index - 2) {
+                value.next = currentNode.next;
+                currentNode.next = value;
+                break;
+            }
+
+            if (count <= size - 1) {
+                count++;
+            }
+
+            currentNode = currentNode.next;
+        }
     }
 
     /**
@@ -182,6 +251,25 @@ public class LinkedList<E> {
      * @return {null} null if value is not found in list
      */
     public E removeValue(E value) {
+        Node<E> currentNode = head;
+        if (head == null) {
+            throw new NoSuchElementException(); // list is empty
+        }
+
+        if (currentNode.data == value) {
+            removeHead();
+            return currentNode.data;
+        }
+
+        while (currentNode.next.next != null) {
+            if (currentNode.next == value) {
+                Node<E> temp = currentNode.next;
+                currentNode.next = currentNode.next.next;
+                return temp.data;
+            }
+            currentNode = currentNode.next;
+        }
+
         return null;
     }
 
@@ -189,8 +277,8 @@ public class LinkedList<E> {
      * Reverses list and returns list of reversed values
      * @return {LinkedList<E>} reversed list
      */
-    public LinkedList<E> reverse() {
-        LinkedList<E> reversed = new LinkedList<>();
+    public SinglyLinkedList<E> reverse() {
+        SinglyLinkedList<E> reversed = new SinglyLinkedList<>();
         Node<E> currentNode = head;
 
         if (head == null) {
@@ -202,6 +290,7 @@ public class LinkedList<E> {
             currentNode = currentNode.next;
         }
 
+        reversed.insertBefore(currentNode.data); // last element
         return reversed;
     }
 
@@ -214,6 +303,7 @@ public class LinkedList<E> {
             list += (currentNode.data.toString() + " --> ");
             currentNode = currentNode.next;
         }
+
         list += (currentNode.data.toString() + "");
         return list;
     }
