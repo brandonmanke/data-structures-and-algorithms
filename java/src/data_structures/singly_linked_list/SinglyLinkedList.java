@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
  */
 @SuppressWarnings("unchecked")
 public class SinglyLinkedList<E> {
-
     private Node<E> head;
     private int size;
 
@@ -44,19 +43,15 @@ public class SinglyLinkedList<E> {
         if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
-
         while (currentNode.next != null) {
             if (counter == index) {
                 return currentNode.data;
             }
-
             if (counter < size - 1) {
                 counter++;
             }
-
             currentNode = currentNode.next;
         }
-
         throw new NoSuchElementException();
     }
 
@@ -66,7 +61,6 @@ public class SinglyLinkedList<E> {
      */
     public void insertBefore(E data) {
         Node<E> currentNode = new Node(data);
-
         if (head == null) {
             head = currentNode;
             size++;
@@ -83,7 +77,6 @@ public class SinglyLinkedList<E> {
      */
     public void insertAfter(E data) {
         Node<E> currentNode = head;
-
         if (head == null) {
             head = new Node<>(data);
             size++;
@@ -91,7 +84,6 @@ public class SinglyLinkedList<E> {
             while (currentNode.next != null) {
                 currentNode = currentNode.next;
             }
-
             currentNode.next = new Node<>(data);
             size++;
         }
@@ -105,23 +97,18 @@ public class SinglyLinkedList<E> {
     public void insertAfter(E data, int index) {
         Node<E> currentNode = head;
         int count = 0;
-
         if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
-
         if (index == 0) {
             insertBefore(data);
             return;
         }
-
         if (index == size - 1) {
             insertAfter(data);
             return;
         }
-
         Node<E> value = new Node<>(data);
-
         while (currentNode.next != null) {
             if (count == index - 1) {
                 value.next = currentNode.next;
@@ -129,11 +116,9 @@ public class SinglyLinkedList<E> {
                 size++;
                 break;
             }
-
             if (count <= size - 1) {
                 count++;
             }
-
             currentNode = currentNode.next;
         }
     }
@@ -146,18 +131,14 @@ public class SinglyLinkedList<E> {
     public void insertBefore(E data, int index) {
         Node<E> currentNode = head;
         int count = 0;
-
         if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
-
         if (index == 0) {
             insertBefore(data);
             return;
         }
-
         Node<E> value = new Node<>(data);
-
         while (currentNode.next != null) {
             if (count == index - 2) {
                 value.next = currentNode.next;
@@ -165,11 +146,9 @@ public class SinglyLinkedList<E> {
                 size++;
                 break;
             }
-
             if (count <= size - 1) {
                 count++;
             }
-
             currentNode = currentNode.next;
         }
     }
@@ -183,7 +162,6 @@ public class SinglyLinkedList<E> {
         if (head == null) {
             throw new NoSuchElementException();
         }
-
         Node<E> removedNode = head;
         head = head.next;
         size--;
@@ -199,11 +177,9 @@ public class SinglyLinkedList<E> {
         if (head == null) {
             throw new NoSuchElementException();
         }
-
         while (currentNode.next.next != null) {
             currentNode = currentNode.next;
         }
-
         Node<E> removedNode = currentNode.next;
         currentNode.next = null;
         size--;
@@ -221,26 +197,21 @@ public class SinglyLinkedList<E> {
         if (index < 0 || index > size - 1) {
             throw new IndexOutOfBoundsException();
         }
-
         if (index == 0) {
             removeHead();
         }
-
         if (index == size - 1) {
             removeEnd();
         }
-
         while (currentNode.next != null) {
             if (counter == index - 1) {
                 break;
             }
             currentNode = currentNode.next;
-
             if (counter <= size - 1) {
                 counter++;
             }
         }
-
         Node<E> removedValue = currentNode.next;
         currentNode.next = currentNode.next.next;
         size--;
@@ -258,12 +229,10 @@ public class SinglyLinkedList<E> {
         if (head == null) {
             throw new NoSuchElementException(); // list is empty
         }
-
         if (currentNode.data == value) {
             removeHead();
             return currentNode.data;
         }
-
         while (currentNode.next.next != null) {
             if (currentNode.next == value) {
                 Node<E> temp = currentNode.next;
@@ -273,7 +242,6 @@ public class SinglyLinkedList<E> {
             }
             currentNode = currentNode.next;
         }
-
         return null;
     }
 
@@ -284,16 +252,13 @@ public class SinglyLinkedList<E> {
     public SinglyLinkedList<E> reverse() {
         SinglyLinkedList<E> reversed = new SinglyLinkedList<>();
         Node<E> currentNode = head;
-
         if (head == null) {
             throw new IllegalStateException();
         }
-
         while (currentNode.next != null) {
             reversed.insertBefore(currentNode.data);
             currentNode = currentNode.next;
         }
-
         reversed.insertBefore(currentNode.data); // last element
         return reversed;
     }
@@ -302,12 +267,10 @@ public class SinglyLinkedList<E> {
     public String toString() {
         Node<E> currentNode = head;
         String list = "";
-
         while (currentNode.next != null) {
             list += (currentNode.data.toString() + " --> ");
             currentNode = currentNode.next;
         }
-
         list += (currentNode.data.toString() + "");
         return list;
     }

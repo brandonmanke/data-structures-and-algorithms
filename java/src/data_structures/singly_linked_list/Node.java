@@ -1,12 +1,10 @@
 package data_structures.singly_linked_list;
 
 /**
- * Node object for linked list
+ * Node object for linked list, stores data and pointer to next node in list.
  * @author Brandon Manke
  */
-
 public class Node<E> {
-
     public E data;
     public Node next;
 
