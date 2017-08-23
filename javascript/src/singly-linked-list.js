@@ -7,23 +7,23 @@
 function LinkedList() {
     this.head = null;
     this.size = 0;
+}
 
-    /**
-     * This is a constructor for list elements / nodes.
-     * @param data - data that node represents
-     */
-    function Node(data) {
-        this.data = data;
-        this.next = null;
-    }
-};
+/**
+ * This is a constructor for list elements / nodes.
+ * @param data - data that node represents
+ */
+function Node(data) {
+    this.data = data;
+    this.next = null;
+}
 
 /**
  * @return size - Returns size of list
  */
 LinkedList.prototype.getSize = function() {
     return this.size;
-}
+};
 
 /**
  * Returns the value of the data at specified node.
@@ -49,7 +49,7 @@ LinkedList.prototype.getValue = function(index) {
     }
 
     return -1; // if nothing is found
-}
+};
 
 /**
  * Adds node at the beginning of the list.
@@ -67,7 +67,7 @@ LinkedList.prototype.insertBefore = function(data) {
     current.next = this.head;
     this.head = current;
     this.size++;
-}
+};
 
 /**
  * Adds node at the end of the list.
@@ -88,7 +88,7 @@ LinkedList.prototype.insertAfter = function(data) {
 
     current.next = new Node(data);
     this.size++;
-}
+};
 
 /**
  * Removes value at specified index
@@ -96,7 +96,7 @@ LinkedList.prototype.insertAfter = function(data) {
  */
 LinkedList.prototype.insert = function(index) {
 
-}
+};
 
 /**
  * Removes node at the beginning of the list.
@@ -111,7 +111,7 @@ LinkedList.prototype.removedHead = function() {
     this.head = temp.next;
     this.size--;
     return temp.data;
-}
+};
 
 /**
  * Removes node at end of the list.
@@ -131,7 +131,7 @@ LinkedList.prototype.removeEnd = function() {
     current.next = null;
     this.size--;
     return temp.data;
-}
+};
 
 /**
  * Removes node at specified index.
@@ -158,7 +158,7 @@ LinkedList.prototype.remove = function(index) {
     }
 
     return temp.data;
-}
+};
 
 /**
  * Reverses linked-list.
@@ -170,22 +170,31 @@ LinkedList.prototype.reverse = function() {
     if (this.head === null) {
         throw console.log('List is empty');
     }
-
     while (current.next !== null) {
         reversed.insertBefore(current.data);
         current = current.next;
     }
-
     return reversed;
-}
+};
 
 /**
  * Removes first instance of value in linked-list.
  * @param value - value to be removed
  */
 LinkedList.prototype.removeValue = function(value) {
-
-}
+    var current = this.head;
+    var removed;
+    if (this.head == null) {
+        throw console.log('List is empty');
+    }
+    while (current.next !== null) {
+        if (current.next.data === value) {
+            removed = current.next;
+            current.next = removed.next;
+        }
+        current = current.next;
+    }
+};
 
 /**
  * Returns list formatted as string with '-->' seperating data.
@@ -208,7 +217,7 @@ LinkedList.prototype.toString = function() {
 
     string += current.data;
     return string;
-}
+};
 
 // Tests:
 var LinkedList = new LinkedList();
@@ -218,3 +227,5 @@ LinkedList.insertAfter(7);
 LinkedList.insertAfter(5);
 console.log('Size:', LinkedList.getSize());
 console.log(LinkedList.toString()); // Prints 3-->2-->7-->5
+LinkedList.removeValue(7);
+console.log(LinkedList.toString()); // Prints 3-->2-->5
