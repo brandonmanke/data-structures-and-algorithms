@@ -1,4 +1,4 @@
-package algorithms.heap_sort;
+package algorithms.sorts;
 
 import java.util.ArrayList;
 
