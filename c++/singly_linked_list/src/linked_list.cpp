@@ -60,6 +60,66 @@ class LinkedList {
             size++;
         }
 
+        void addTo(const int index, const E data) {
+            int counter = 0;
+
+            if (i == 0)
+                addToFront(data);
+
+            if (i == getSize() - 1)
+                addToEnd(data);
+
+            Node *temp = new Node();
+            temp->data = data;
+            Node *current = head;
+
+            while (current->next != 0) {
+                if (counter == index - 1) {
+                    break;
+                }
+            }
+            temp->next = current->next;
+            current->next = temp;
+            size++;
+        }
+
+        E removeEnd() {
+            if (head == 0)
+                throw;
+
+            Node *current = head;
+            while (current->next->next != 0) {
+                current = current->next;
+            }
+            Node *removed = current->next;
+            delete current->next;
+            current->next = 0;
+            size--;
+        }
+
+        E removeFront() {
+            if (head == 0)
+                throw;
+
+            Node *temp = head;
+            head = head->next;
+            size--;
+        }
+
+        E remove(const int index) {
+            if (index == 0)
+                removeFront();
+
+            if (index == getSize - 1)
+                removeEnd();
+
+            Node *current = head;
+            int counter = 0;
+            while (current->next != 0) {
+                if (counter == index - 1)
+            }
+        }
+
         /**
          * Prints list to string
          * @return str - list elements seperated by '->' in a string
