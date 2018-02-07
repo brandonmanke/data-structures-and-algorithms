@@ -6,5 +6,9 @@
 
 int main() {
     // TODO
+    LinkedList<int> *list = new LinkedList<int>();
+    list->addToFront(4);
+    list->addToEnd(3);
+    std::cout << list->toString() << std::endl;
     return 0;
 }

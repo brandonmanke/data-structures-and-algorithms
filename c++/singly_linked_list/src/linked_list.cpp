@@ -22,7 +22,13 @@ class LinkedList {
         }
 
         ~LinkedList() {
-            // TODO
+            Node *current = head;
+            while (current != 0) {
+                Node *next = current->next;
+                delete current;
+                current = next;
+            }
+            head = 0;
         }
 
         /**
@@ -63,10 +69,10 @@ class LinkedList {
         void addTo(const int index, const E data) {
             int counter = 0;
 
-            if (i == 0)
+            if (index == 0)
                 addToFront(data);
 
-            if (i == getSize() - 1)
+            if (index == getSize() - 1)
                 addToEnd(data);
 
             Node *temp = new Node();
@@ -110,13 +116,24 @@ class LinkedList {
             if (index == 0)
                 removeFront();
 
-            if (index == getSize - 1)
+            if (index == getSize() - 1)
                 removeEnd();
 
             Node *current = head;
+            Node *removed;
             int counter = 0;
             while (current->next != 0) {
-                if (counter == index - 1)
+                if (counter == index - 1) {
+                    removed = current->next;
+                    if (removed->next != 0) {
+                        current->next = removed->next;
+                    } else {
+                        current->next = 0;
+                    }
+                } else {
+                    counter++;
+                    current = current->next;
+                }
             }
         }
 
