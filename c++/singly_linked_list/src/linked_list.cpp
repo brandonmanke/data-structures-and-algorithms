@@ -69,11 +69,15 @@ class LinkedList {
         void addTo(const int index, const E data) {
             int counter = 0;
 
-            if (index == 0)
+            if (index == 0) {
                 addToFront(data);
+                return;
+            }
 
-            if (index == getSize() - 1)
+            if (index == getSize()) {
                 addToEnd(data);
+                return;
+            }
 
             Node *temp = new Node();
             temp->data = data;
@@ -91,33 +95,38 @@ class LinkedList {
 
         E removeEnd() {
             if (head == 0)
-                throw;
+                throw "List is empty";
 
             Node *current = head;
             while (current->next->next != 0) {
                 current = current->next;
             }
             Node *removed = current->next;
+            E data = removed->data;
             delete current->next;
             current->next = 0;
             size--;
+            return data;
         }
 
         E removeFront() {
             if (head == 0)
-                throw;
+                throw "List is empty";
 
             Node *temp = head;
             head = head->next;
             size--;
+            E removed = temp->data;
+            delete temp;
+            return removed;
         }
 
         E remove(const int index) {
             if (index == 0)
-                removeFront();
+                return removeFront();
 
             if (index == getSize() - 1)
-                removeEnd();
+                return removeEnd();
 
             Node *current = head;
             Node *removed;
