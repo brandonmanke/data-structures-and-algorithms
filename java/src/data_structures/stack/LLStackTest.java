@@ -1,6 +1,6 @@
 package data_structures.stack;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for LLStack
