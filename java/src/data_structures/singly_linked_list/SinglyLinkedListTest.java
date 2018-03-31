@@ -1,82 +1,86 @@
 package data_structures.singly_linked_list;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
+
 /**
  * JUnit 4 Test for Singly Linked List
  * @author Brandon Manke
  */
 public class SinglyLinkedListTest {
 
-  @org.junit.Before
+  @BeforeAll
   public void setUp() throws Exception {
 
   }
 
-  @org.junit.After
+  @AfterAll
   public void tearDown() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void getSize() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void getHead() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void getValue() throws IndexOutOfBoundsException {
 
   }
 
-  @org.junit.Test
+  @Test
   public void insertBefore() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void insertAfter() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void insertAfter1() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void insertBefore1() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void removeHead() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void removeEnd() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void remove() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void removeValue() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public void reverse() throws Exception {
 
   }
 
-  @org.junit.Test
+  @Test
   public String toString() {
       return null;
   }
