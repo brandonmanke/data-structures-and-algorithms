@@ -1,9 +1,9 @@
 public class Stack<E> {
     private int size;
-    private Node<E> head;
+    private Node head;
 
-    private class Node<E> {
-        Node<E> next;
+    private class Node {
+        Node next;
         E data;
 
         public Node() {}
@@ -14,7 +14,7 @@ public class Stack<E> {
     }
 
     public Stack() {
-        this.head = new Node<E>();
+        this.head = new Node();
     }
 
     public E peek() { return this.head.data; }
@@ -22,7 +22,7 @@ public class Stack<E> {
     public int size() { return this.size; }
 
     public void push(E data) { 
-        Node<E> newHead = new Node<E>(data);
+        Node newHead = new Node(data);
         newHead.next = this.head;
         this.head = newHead;
         this.size++;
@@ -38,7 +38,7 @@ public class Stack<E> {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        Node<E> current = head;
+        Node current = head;
 
         sb.append("[");
         while (current.next != null) { 

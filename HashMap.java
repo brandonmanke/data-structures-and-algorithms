@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @param <V>
  */
 class HashMap<K, V> {
-    private ArrayList<Bucket<K, V>> table;
+    private ArrayList<Bucket> table;
     private int size;
     private int capacity;
 
@@ -14,10 +14,10 @@ class HashMap<K, V> {
     private final double MAX_LOAD_FACTOR = 0.75;
     private final double MIN_LOAD_FACTOR = 0.25;
 
-    private class Bucket<K, V> {
+    private class Bucket {
         public K key;
         public V val;
-        public Bucket<K, V> next;
+        public Bucket next;
         
         public Bucket(K key, V val) {
             this.key = key;
@@ -50,14 +50,14 @@ class HashMap<K, V> {
 
     public V get(K key) {
         int index = hash(key);
-        Bucket<K, V> b = table.get(index);
+        Bucket b = table.get(index);
         if (b == null) {
             return null;
         }
         if (b.key.equals(key)) {
             return b.val;
         } else {
-            Bucket<K, V> curr = table.get(index);
+            Bucket curr = table.get(index);
             while (!curr.key.equals(key) && curr.next != null) {
                 curr = curr.next;
             }
@@ -70,17 +70,17 @@ class HashMap<K, V> {
 
     public void set(K key, V val) {
         int index = hash(key);
-        Bucket<K, V> curr = this.table.get(index);
+        Bucket curr = this.table.get(index);
         if (curr == null) {
-            this.table.set(index, new Bucket<>(key, val));
+            this.table.set(index, new Bucket(key, val));
             this.size++;
         } else if (curr.key.equals(key)) {
-            curr = new Bucket<>(key, val);
+            curr = new Bucket(key, val);
         } else {
             while (curr.next != null) { // Resolve collision
                 curr = curr.next;
             }
-            curr.next = new Bucket<>(key, val);
+            curr.next = new Bucket(key, val);
             this.size++;
         }
 
@@ -103,9 +103,9 @@ class HashMap<K, V> {
         if (this.table.get(index) == null) {
             throw new Exception("Element does not exist");
         }
-        Bucket<K, V> curr = this.table.get(index);
-        Bucket<K, V> prev = null;
-        Bucket<K, V> head = curr; // head of adj list
+        Bucket curr = this.table.get(index);
+        Bucket prev = null;
+        Bucket head = curr; // head of adj list
         while (!curr.key.equals(key) && curr.next != null) {
             prev = curr;
             curr = curr.next;
@@ -151,7 +151,7 @@ class HashMap<K, V> {
             return;
         }
 
-        ArrayList<Bucket<K, V>> newTable = new ArrayList<>(this.capacity);
+        ArrayList<Bucket> newTable = new ArrayList<>(this.capacity);
         for (int i = 0; i < this.capacity; i++) {
             newTable.add(null);
         }
@@ -160,8 +160,8 @@ class HashMap<K, V> {
                 continue;
             }
 
-            Bucket<K, V> curr = this.table.get(i);
-            Bucket<K, V> nextCopy = curr.next;
+            Bucket curr = this.table.get(i);
+            Bucket nextCopy = curr.next;
             curr.next = null;
             insertIntoNewTable(curr, newTable);
             while (nextCopy != null) {
@@ -172,17 +172,17 @@ class HashMap<K, V> {
         this.table = newTable;
     }
 
-    private void insertIntoNewTable(Bucket<K, V> curr, ArrayList<Bucket<K, V>> newTable) {
+    private void insertIntoNewTable(Bucket curr, ArrayList<Bucket> newTable) {
         K key = curr.key;
         int newIndex = hash(key);
         if (newTable.get(newIndex) == null) {
-            newTable.set(newIndex ,new Bucket<>(curr.key, curr.val));
+            newTable.set(newIndex ,new Bucket(curr.key, curr.val));
         } else {
-            Bucket<K, V> b = newTable.get(newIndex);
+            Bucket b = newTable.get(newIndex);
             while (b.next != null) {
                 b = b.next;
             }
-            b.next = new Bucket<>(curr.key, curr.val);
+            b.next = new Bucket(curr.key, curr.val);
         }
     }
 
@@ -194,11 +194,11 @@ class HashMap<K, V> {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        for (Bucket<K, V> b : this.table) {
+        for (Bucket b : this.table) {
             if (b == null) continue;
             sb.append("[");
             sb.append(b.toString());
-            Bucket<K, V> curr = b;
+            Bucket curr = b;
             while (curr.next != null) {
                 curr = curr.next;
                 sb.append("->");

@@ -37,10 +37,10 @@ class QuickSort implements Sort {
         arr[j] = temp;
     }
 
-    private static void print(int[] arr) {
+    /*private static void print(int[] arr) {
         System.out.print("[");
         for (int i : arr)
             System.out.print(i + ",");
         System.out.println("]");
-    }
+    }*/
 }

@@ -1,5 +1,5 @@
 // really basic impl tests for debugging
-class HeapMain {
+class MapMain {
     public static void main(String[] args) throws Exception {
         HashMap<String, Integer> map = new HashMap<>();
         System.out.println("Size:" + map.size());
